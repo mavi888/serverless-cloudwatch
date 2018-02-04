@@ -11,3 +11,16 @@ functions:
       - http:
           method: get
           path: hello
+
+resources:
+  Resources:
+## CloudWatch custom metrics
+    ServerlessCloudWatchCustomMetricFilter:
+      Type: "AWS::Logs::MetricFilter"
+      Properties:
+        LogGroupName: /aws/lambda/serverless-cloudwatch-dev-hello
+        FilterPattern: "RECORD HI"
+        MetricTransformations:
+          - MetricValue: "1"
+            MetricNamespace: CustomMetric
+            MetricName: hello-metric-dev
